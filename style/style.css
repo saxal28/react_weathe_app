@@ -1,0 +1,34 @@
+#search-container {
+	text-align:center;
+	margin-top:30px;
+	margin-bottom:30px;
+	padding:10px;
+}
+
+.icon {
+	width:50px;
+	height:50px;
+}
+
+body {
+	color:white;
+	background-color:#333;
+/* 	background:url(http://i.imgur.com/B4ETh8E.jpg); */
+	background-size:cover;
+	background-position:bottom;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}
+
+.well {
+	color:#333;
+}
+
+#search-container {
+	width:400px;
+	margin:20px auto;
+}
+
+.container {
+	margin-top:4%;
+}
