@@ -15,10 +15,10 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-//=======================================
-//					CONTAINER COMPONENT
+//===============================================
+//					     CONTAINER COMPONENT
 //			this container renders all components
-//=======================================
+//===============================================
 
 class WeatherBox extends React.Component {
 	constructor(props) {
@@ -59,7 +59,7 @@ class WeatherBox extends React.Component {
 	handleZipChange(e) {
 		if (this.state.search.length >= 4) {
 			this.setState({search: e.target.value})
-				var zipcode = this.state.search;
+				var zipcode = $("#search-input").val();
 				console.log(this.state.seach)
 				var link = "https://api.wunderground.com/api/e9f795d54303e612/conditions/q/" + zipcode + ".json";
 				var full_location;
