@@ -88,7 +88,7 @@ componentDidUpdate() {
 							</h3>
 							<h3><span className="temperature">{this.state.day1_temp_low}<small>F</small></span> <span className="hi_lo">Lo</span></h3>
 							<h3><span className="">{this.state.day1_conditions}</span></h3>
-							<img src="http://downloadicons.net/sites/default/files/partly-cloudy-day-icon-61624.png" className="icon"/>
+							<img src={this.props.icons[this.state.day1_conditions]} className="icon"/>
 						</div>
 					</div>
 					<div className="col-sm-6">
@@ -97,7 +97,7 @@ componentDidUpdate() {
 							<h3>{this.state.day2_temp_high}<small>F</small></h3>
 							<h3>{this.state.day2_temp_low}<small>F</small></h3>
 							<h3>{this.state.day2_conditions}</h3>
-							<img src="http://downloadicons.net/sites/default/files/partly-cloudy-day-icon-61624.png" className="icon"/>
+							<img src={this.props.icons[this.state.day2_conditions]} className="icon"/>
 						</div>
 					</div>
 				</div>

@@ -95,6 +95,14 @@ class WeatherBox extends React.Component {
 
 	render() {
 	var link = "http://api.wunderground.com/api/e9f795d54303e612/conditions/q/" + this.state.zipcode + ".json";
+	var icons = {
+		"Clear": "https://cdn1.iconfinder.com/data/icons/linear-weather-icons/100/meteo_sunny-512.png",
+		"Partly Cloudy": "http://downloadicons.net/sites/default/files/partly-cloudy-day-icon-61624.png",
+		"Rain": "http://icons.veryicon.com/ico/System/Icons8%20Metro%20Style/Weather%20Rain.ico",
+		"Mostly Cloudy": "http://image.flaticon.com/icons/svg/53/53934.svg",
+		"Overcast": "http://image.flaticon.com/icons/svg/53/53934.svg"
+
+	}
 		return (
 			<div className="container">
 				<h1 className="text-center">Weather for: {this.state.search}</h1>
@@ -102,10 +110,10 @@ class WeatherBox extends React.Component {
 				<WeatherInput change={this.handleZipChange.bind(this)} onChange={this.handleChange.bind(this)} zipcode={this.state.zipcode}/>
 				<div className="row">
 					<div className="col-md-6">
-							<TemperatureBox temp={this.state.temp} condition={this.state.condition} humidity={this.state.humidity} />
+							<TemperatureBox temp={this.state.temp} condition={this.state.condition} humidity={this.state.humidity} icons={icons}/>
 					</div>
 					<div className="col-md-6">
-							<NextDayConditionsBox zipcode={this.state.zipcode} day1_day={this.state.temp} style='color:red' />
+							<NextDayConditionsBox zipcode={this.state.zipcode} day1_day={this.state.temp} icons={icons}/>
 					</div>
 				</div>
 			</div>
