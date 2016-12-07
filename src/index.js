@@ -29,13 +29,15 @@ class WeatherBox extends React.Component {
 			temp: "",
 			condition: "",
 			search: "",
-			coord: ""
+			humidity: ""
 		}
 	}
 	componentWillMount() {
 
 		var link = "http://api.wunderground.com/api/e9f795d54303e612/conditions/q/" + "62220" + ".json";
 		var ojb = this;
+		//set background color;
+		document.body.style = 'background:url(http://i.imgur.com/2KUoLff.gif); background-size:cover'
 
 			$.ajax({
 							url: link,
@@ -45,13 +47,12 @@ class WeatherBox extends React.Component {
 							async: true,
 							dataType: "json",
 							success: function (data) {
-									console.log(data)
+									console.log(data.current_observation)
 									let current_location = data.current_observation.display_location.full;
 									let temp = data.current_observation.temp_f;
 									let condition = data.current_observation.weather;
-									console.log(current_location);
-									this.setState({full_location: current_location, temp:temp, condition:condition});
-									console.log(this.state.full_location);
+									let humidity = data.current_observation.relative_humidity;
+									this.setState({full_location: current_location, temp:temp, condition:condition, humidity: humidity});
 							}
 					});
 	 };
@@ -62,9 +63,9 @@ class WeatherBox extends React.Component {
 				var zipcode = $("#search-input").val();
 				console.log(this.state.seach)
 				var link = "https://api.wunderground.com/api/e9f795d54303e612/conditions/q/" + zipcode + ".json";
-				var full_location;
-				var temp;
-
+				// var full_location;
+				// var temp;
+				//========================================================================================================================
         // THIS GETS THE WEAHER INFO FROM API;
 				$.ajax({
 								url: link,
@@ -75,8 +76,8 @@ class WeatherBox extends React.Component {
 								dataType: "json",
 								success: function (data) {
 										console.log(data.current_observation);
-										full_location = data.current_observation.display_location.full;
-										temp = data.current_observation.temp_f;
+										let full_location = data.current_observation.display_location.full;
+										let temp = data.current_observation.temp_f;
 										let condition = data.current_observation.weather;
 										this.setState({full_location: full_location, zipcode: zipcode, temp: temp, condition: condition});
 								}
@@ -84,6 +85,7 @@ class WeatherBox extends React.Component {
 		} else {
 			 this.setState({search: e.target.value})
 		}
+			//=======================================================================================================================
 	}
 
 
@@ -100,10 +102,10 @@ class WeatherBox extends React.Component {
 				<WeatherInput change={this.handleZipChange.bind(this)} onChange={this.handleChange.bind(this)} zipcode={this.state.zipcode}/>
 				<div className="row">
 					<div className="col-md-6">
-							<TemperatureBox temp={this.state.temp} condition={this.state.condition} />
+							<TemperatureBox temp={this.state.temp} condition={this.state.condition} humidity={this.state.humidity} />
 					</div>
 					<div className="col-md-6">
-							<NextDayConditionsBox />
+							<NextDayConditionsBox zipcode={this.state.zipcode} day1_day={this.state.temp} style='color:red' />
 					</div>
 				</div>
 			</div>
@@ -112,6 +114,11 @@ class WeatherBox extends React.Component {
 }
 
 ReactDOM.render(
-  <WeatherBox />
+  <WeatherBox style={bodyStyle}/>
   , document.querySelector('#container')
 );
+
+//CSS STYLES
+var bodyStyle = {
+	color: red
+}
