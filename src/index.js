@@ -24,18 +24,28 @@ class WeatherBox extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			zipcode: "0",
-			full_location: "Belleville, IL",
+			zipcode: "",
+			full_location: "",
 			temp: "",
 			condition: "",
 			search: "",
-			humidity: ""
+			humidity: "",
+			coordinates: ""
 		}
 	}
-	componentWillMount() {
-
-		var link = "http://api.wunderground.com/api/e9f795d54303e612/conditions/q/" + "62220" + ".json";
+	// componentWillMount() {
+	// 	const ojb = this;
+	// 	navigator.geolocation.getCurrentPosition(function(position) {
+  // 		console.log(position.coords.latitude, position.coords.longitude);
+	// 		let coords =  position.coords.latitude + "," + position.coords.longitude;
+	// 		ojb.setState({coordinates: coords})
+	// 		console.log("cordinates:" + ojb.state.coordinates)
+	// 	});
+	// }
+	componentDidMount() {
 		var ojb = this;
+		var link = "http://api.wunderground.com/api/e9f795d54303e612/conditions/q/" + "62220" + ".json";
+
 		//set background color;
 		document.body.style = 'background:url(http://i.imgur.com/2KUoLff.gif); background-size:cover'
 
@@ -45,6 +55,8 @@ class WeatherBox extends React.Component {
 							//see the use of context (refers back to react object)
 							context: ojb,
 							async: true,
+							// crossDomain: true,
+    					// dataType: 'jsonp',
 							dataType: "json",
 							success: function (data) {
 									console.log(data.current_observation)
@@ -100,7 +112,10 @@ class WeatherBox extends React.Component {
 		"Partly Cloudy": "http://downloadicons.net/sites/default/files/partly-cloudy-day-icon-61624.png",
 		"Rain": "http://icons.veryicon.com/ico/System/Icons8%20Metro%20Style/Weather%20Rain.ico",
 		"Mostly Cloudy": "http://image.flaticon.com/icons/svg/53/53934.svg",
-		"Overcast": "http://image.flaticon.com/icons/svg/53/53934.svg"
+		"Overcast": "http://image.flaticon.com/icons/svg/53/53934.svg",
+		"Scattered Clouds": "http://image.flaticon.com/icons/svg/53/53934.svg",
+		"Chance of Rain": "http://www.mikeafford.com/store/store-images/ms01b_example_heavy_rain_showers.png",
+		"Light Snow": "https://cdn4.iconfinder.com/data/icons/weathercons/64/snow-512.png"
 
 	}
 		return (
@@ -122,11 +137,6 @@ class WeatherBox extends React.Component {
 }
 
 ReactDOM.render(
-  <WeatherBox style={bodyStyle}/>
+  <WeatherBox />
   , document.querySelector('#container')
 );
-
-//CSS STYLES
-var bodyStyle = {
-	color: red
-}
